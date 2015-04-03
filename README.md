@@ -23,7 +23,7 @@ Go to line number 62 of your `ErrorHandler.php` file. As you can see, this is th
 
 On your `index.php` file, you have to call your class to active the new error handler. Simply paste the following line of code right before `$f3->run()`.
 
-```
+```php
 if($f3->get('DEBUG') == 3) ErrorHandler::instance($f3);
 ``` 
 
