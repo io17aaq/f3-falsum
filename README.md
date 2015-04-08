@@ -10,26 +10,20 @@ Fig. 1 - Error Handler in action
 
 ###Step 1 - Download Files
 
-First of all, you need to download two files located in the `dist/` folder on this repository. `ErrorHandler.php` thats the php class, and `error.css` thats the stylesheet that gives it a nice look. Go ahead and download it. 
+First of all, you need to download the file located in the `dist/` folder on this repository. `ErrorHandler.php` thats the php class. Go ahead and download it.
 
 ###Step 2 - Paste Files
 
-The second part its even easier than the previous one, just copy this two files you've just downloaded into the same level that `base.php` file containing all Fat-Free core stuff. This is usually located on your root directory, than `lib/` folder. I have done in this way so your framework always loads this, when loading all core components and classes.
+The second part its even easier than the previous one, just copy this file you've just downloaded into the same level that `base.php` file containing all Fat-Free core stuff. This is usually located on your root directory, than go to `lib/` folder. I have done it, in this way so your framework always loads it by itself, when loading all the other core components and classes.
 
-###Step 3 - Check CSS path
-Go to line number 62 of your `ErrorHandler.php` file. As you can see, this is the location of your css file. The default stucture its usually `lib/error.css` and thats why this cames as default location. Notice that if you want to change the location, or you renamed `lib/` folder, you have to change it here to, if not, all styles won't be applied.
-
-###Step 4 - Calling your Class
+###Step 3 - Calling your Class
 
 On your `index.php` file, you have to call your class to active the new error handler. Simply paste the following line of code right before `$f3->run()`.
 
 ```php
 if($f3->get('DEBUG') == 3) ErrorHandler::instance($f3);
-``` 
+```
 
-What this will do, is check if your Debug global variable is on developer mode. If true, calls the ErrorHandler class instantiation method with `$f3` as a parameter.
+What this will do, is check if your Debug global variable is on developer mode. If its true, calls the ErrorHandler class instantiation method with `$f3` as a parameter.
 
 Et voilá, now it should be working and you get a better looking way to display your errors. I'm suspect for saying this, but since I'm using this, it helped me a lot many many times.
-
-
-
