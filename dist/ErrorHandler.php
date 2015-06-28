@@ -1,52 +1,57 @@
 <?php
 
 class ErrorHandler{
-
 	static function instance($f3){
 		$f3->set('ONERROR',
 		    function($f3) {
-		      	$status = $f3->get('ERROR.status');
-		      	$code = $f3->get('ERROR.code');
-		      	$text = $f3->get('ERROR.text');
-		      	$traces = $f3->get('ERROR.trace');
+		    	$status = $f3->get('ERROR.status');
+		    	$code = $f3->get('ERROR.code');
+		    	$text = $f3->get('ERROR.text');
+		    	$traces = $f3->get('ERROR.trace');
 
-				$eol = "";
-				$html = '';
-				$pos = 0;
-				foreach($traces as $trace):
-					if($pos == 0):
-						$line = $trace['line'] - 1;
+				$errors = array();
+				$i = 0;
+				preg_match_all("/\[.*:\d+\]/", strip_tags($traces), $matches);
+				foreach($matches[0] as $result){
+					$result = str_replace(array('[', ']' ), '', $result);
+					preg_match_all("/:\d+/", $result, $line);
+					$errors[$i]['line'] = str_replace(':', '', $line[0][0]);
+					$errors[$i]['file'] = str_replace(':'.$errors[$i]['line'], '', $result);
+					if($i == 0){
+						$eol = "";
+						$line = $errors[$i]['line'] - 1;
 						$line_start = $line - 6;
 						$line_end = $line + 6;
-						$rows = file($trace['file']);
-						$html .= '<div class="code-wrap">';
-						$html .= '<p>File: <span class="file-link">'.$trace['file'].' </span>'.$line.'</p>';
-						$html .= '<pre class="excerpt">'.$eol;
-						for($i = $line_start; $i <= $line_end; $i++):
-							$row = isset($rows[$i]) ? $rows[$i] : '';
-							if($i == $line):
-								$html .= '<code class="error-line">'.$i.' '.htmlentities($row).'</code>'.$eol;
+						$pos = 0;
+						$rows = file($errors[$i]['file']);
+						$errors[$i]['script'] = '<div class="code-wrap">';
+						$errors[$i]['script'] .= '<p>File: <span class="file-link">'.$errors[$i]['file'].' </span>'.$errors[$i]['line'].'</p>';
+						$errors[$i]['script'] .= '<pre class="excerpt">'.$eol;
+						for($pos = $line_start; $pos <= $line_end; $pos++):
+							$row = isset($rows[$pos]) ? $rows[$pos] : '';
+							if($pos == $line):
+								$errors[$i]['script'] .= '<code class="error-line">'.$pos.' '.htmlentities($row).'</code>'.$eol;
 							else:
-								$html .= '<code>'.$i.' '.htmlentities($row).'</code>'.$eol;
+								$errors[$i]['script'] .= '<code>'.$pos.' '.htmlentities($row).'</code>'.$eol;
 							endif;
 						endfor;
-						$html .= '</pre></div>';
-					else:
+						$errors[$i]['script'] .= '</pre></div>';
+					}else{
 						if($pos == 1):
-							$html .= '<h3>Call Stack</h3>';
+							$html = '<h3>Call Stack</h3>';
 						endif;
 						$html .= '<div class="code-wrap">';
-						$html .= '<p>File: <span class="file-link">'.$trace['file'].'</span> '.$trace['line'].'</p>';
+						$html .= '<p>File: <span class="file-link">'.$errors[$i]['file'].'</span> '.$errors[$i]['line'].'</p>';
 						$html .= '</div>';
-					endif;
-					$pos++;
-				endforeach;
+					};
+					$i++;
+				}
 
 				$headers = '';
 				$header = $f3->hive()['HEADERS'];
-				foreach($header as $key => $value):
-					$headers .= '<p><span>'.$key.'</span> '.$value.'</p>';
-				endforeach;
+				foreach($header as $key => $value){
+					$headers .= '<p style="word-wrap: break-word;"><span>'.$key.'</span> '.$value.'</p>';
+				}
 
 				echo $f3->hive['AJAX']?
 					json_encode($f3->hive['ERROR']):
@@ -63,7 +68,7 @@ class ErrorHandler{
 						</style>
 					</head>
 					<body>
-						<div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; overflow-y: auto; background-color: #FFF; padding-bottom: 40px">
+						<div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; overflow-y: auto; background-color: #FFF; padding-bottom: 40px; z-index: 9999;">
 							<div id="header">
 								<div class="grid">
 									<h1 style="color: #FFF">'.$status.' '.$code.'</h1>
@@ -72,6 +77,7 @@ class ErrorHandler{
 							</div>
 							<div class="source grid">
 								<h3>Source Code</h3>
+								'.$errors[0]['script'].'
 								'.$html.'
 								<h3>Headers</h3>
 								<div class="headers">'.$headers.'</div>
@@ -82,5 +88,4 @@ class ErrorHandler{
 		    }
 		);
 	}
-
 }
