@@ -2,11 +2,9 @@
 
 namespace Falsum;
 
-class Run{
-
-	static function handler()
-	{
-
-	}
-
+class Run
+{
+    public static function handler()
+    {
+    }
 }
