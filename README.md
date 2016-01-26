@@ -14,3 +14,14 @@ To install it on you web app, just run the following command in you Terminal at 
 composer require rooftoprafa/f3-falsum
 ```
 
+Next, on your bootstrap file (usually `index.php`) add the following line:
+
+```php
+Falsum\Run::handler();
+```
+
+By default Falsum will only run when the `DEBUG` variable from the hive is set to 3. If you want to override this to show in any `DEBUG` status, send true as parameter on `handler()`.
+
+```php
+Falsum\Run::handler(true);
+```
