@@ -4,7 +4,6 @@ namespace Falsum;
 
 class Run
 {
-<<<<<<< HEAD
 
 	public static function handler($override = false)
 	{
@@ -132,9 +131,4 @@ class Run
 			}
 		);
 	}
-=======
-    public static function handler()
-    {
-    }
->>>>>>> 76c9d3d4276dfc93bf82eaedf574b75971cff06f
 }
