@@ -5,25 +5,25 @@ namespace Falsum;
 class Run
 {
 
-	public static function handler($debug = 0, $override = false)
-	{
-		if($override){
-			self::showErrors();
-		}else{
-			if($debug == 3){
-				self::showErrors();
-			}
-		}
-	}
-
-	public static function showErrors()
+	public static function handler($override = false)
 	{
 		/**
 		 * Create a framework instance variable.
 		 */
 
 		$fwi = \Base::instance();
-		
+
+		if($override){
+			self::showErrors($fwi);
+		}else{
+			if($fwi->get('DEBUG') == 3){
+				self::showErrors($fwi);
+			}
+		}
+	}
+
+	public static function showErrors($fwi)
+	{	
 		/**
 		 * Set the ONERROR property.
 		 */
