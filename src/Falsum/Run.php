@@ -60,10 +60,10 @@ class Run
 				    $line_start = $line - 6;
 				    $line_end = $line + 6;
 				    $pos = 0;
-				    $rows = file($errors[$key]['file']);
+				    $rows = file($_SERVER['DOCUMENT_ROOT'].'/'.$errors[$key]['file']);
 				    $errors[$key]['script'] = '<div class="code-wrap">';
 				    $errors[$key]['script'] .= '<pre class="excerpt">'.$eol;
-				    for ($pos = $line_start; $pos <= $line_end; $pos++):
+				    for($pos = $line_start; $pos <= $line_end; $pos++):
 				        $row = isset($rows[$pos]) ? $rows[$pos] : '';
 					    if ($pos == $line):
 					        $errors[$key]['script'] .= '<code class="error-line">'.$pos.' '.htmlentities($row).'</code>'.$eol; else:
