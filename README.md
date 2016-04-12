@@ -1,8 +1,8 @@
 ## Falsum
 Pretty error handling for Fat-Free Framework
 
-[![Downloads](https://img.shields.io/packagist/dm/ptraceur/f3-falsum.svg)](https://packagist.org/packages/ptraceur/f3-falsum)
-[![Version](http://img.shields.io/packagist/v/ptraceur/f3-falsum.svg)](https://packagist.org/packages/ptraceur/f3-falsum)
+[![Downloads](https://img.shields.io/packagist/dm/ptraceur/f3-falsum.svg?style=flat-square)](https://packagist.org/packages/ptraceur/f3-falsum)
+[![Version](http://img.shields.io/packagist/v/ptraceur/f3-falsum.svg?style=flat-square)](https://packagist.org/packages/ptraceur/f3-falsum)
 
 ![Preview](http://i.imgur.com/Wz5gJKy.jpg)
 
