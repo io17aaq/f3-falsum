@@ -1,8 +1,8 @@
 ## Falsum
 Pretty error handling for Fat-Free Framework
 
-[![Downloads](https://img.shields.io/packagist/dm/rooftoprafa/f3-falsum.svg)](https://packagist.org/packages/rooftoprafa/f3-falsum)
-[![Version](http://img.shields.io/packagist/v/rooftoprafa/f3-falsum.svg)](https://packagist.org/packages/rooftoprafa/f3-falsum)
+[![Downloads](https://img.shields.io/packagist/dm/ptraceur/f3-falsum.svg)](https://packagist.org/packages/ptraceur/f3-falsum)
+[![Version](http://img.shields.io/packagist/v/ptraceur/f3-falsum.svg)](https://packagist.org/packages/ptraceur/f3-falsum)
 
 ![Preview](http://i.imgur.com/Wz5gJKy.jpg)
 
@@ -11,7 +11,7 @@ Pretty error handling for Fat-Free Framework
 To install it on you web app, just run the following command in you Terminal at your root directory:
 
 ```
-composer require rooftoprafa/f3-falsum
+composer require ptraceur/f3-falsum
 ```
 
 Next, on your bootstrap file (usually `index.php`) add the following line:
