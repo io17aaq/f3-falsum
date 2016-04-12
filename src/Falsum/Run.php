@@ -59,7 +59,46 @@ class Run
                     $line_start = $line - 6;
                     $line_end = $line + 6;
                     $pos = 0;
-                    $rows = file($errors[$key]['file']);
+
+                    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+                    $os_array = array(
+                        '/windows nt 10/i'     =>  'Windows',
+                        '/windows nt 6.3/i'     =>  'Windows',
+                        '/windows nt 6.2/i'     =>  'Windows',
+                        '/windows nt 6.1/i'     =>  'Windows',
+                        '/windows nt 6.0/i'     =>  'Windows',
+                        '/windows nt 5.2/i'     =>  'Windows',
+                        '/windows nt 5.1/i'     =>  'Windows',
+                        '/windows xp/i'         =>  'Windows',
+                        '/windows nt 5.0/i'     =>  'Windows',
+                        '/windows me/i'         =>  'Windows',
+                        '/win98/i'              =>  'Windows',
+                        '/win95/i'              =>  'Windows',
+                        '/win16/i'              =>  'Windows',
+                        '/macintosh|mac os x/i' =>  'Mac OS X',
+                        '/mac_powerpc/i'        =>  'Mac OS 9',
+                        '/linux/i'              =>  'Linux',
+                        '/ubuntu/i'             =>  'Ubuntu',
+                        '/iphone/i'             =>  'iPhone',
+                        '/ipod/i'               =>  'iPod',
+                        '/ipad/i'               =>  'iPad',
+                        '/android/i'            =>  'Android',
+                        '/blackberry/i'         =>  'BlackBerry',
+                        '/webos/i'              =>  'Mobile'
+                    );
+
+                    foreach($os_array as $regex => $value){
+                        if(preg_match($regex, $user_agent)){
+                            $os_platform = $value;
+                        }
+                    }
+
+                    $add_root = '';
+                    if($os_platform != 'Windows'){
+                        $add_root = $_SERVER['DOCUMENT_ROOT'].'/';
+                    }
+
+                    $rows = file($add_root.$errors[$key]['file']);
                     $errors[$key]['script'] = '<div class="code-wrap">';
                     $errors[$key]['script'] .= '<pre class="excerpt">'.$eol;
                     for ($pos = $line_start; $pos <= $line_end; $pos++):
