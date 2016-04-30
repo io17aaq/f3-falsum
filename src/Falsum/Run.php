@@ -152,7 +152,7 @@ class Run
                     $path = substr($error['file'], -25);
                     $html_structure .= ''.
                     '<div class="stack'.$selected.'" ref="'.$key.'">'.
-                    '	<h4><span class="pos">'.$key.'</span> Line Number '.$error['line'].'</h4>'.
+                    '	<h4><span class="pos">'.$key.'</span> Line Number '.($error['line'] - 1).'</h4>'.
                     '	<p>...'.$path.'</p>'.
                     '</div>';
                 }
