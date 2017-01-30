@@ -1,5 +1,5 @@
 {
-    "name": "ptraceur/f3-falsum",
+    "name": "rafamds/f3-falsum",
     "license": "MIT",
     "description": "Pretty error handling for Fat-Free Framework",
     "keywords": ["library", "error", "handling", "exception", "falsum", "f3", "fat-free framework"],
