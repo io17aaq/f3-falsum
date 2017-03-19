@@ -11,7 +11,7 @@ Pretty error handling for Fat-Free Framework
 To install it on you web app, just run the following command in you Terminal at your root directory:
 
 ```
-composer require ptraceur/f3-falsum
+composer require rafamds/f3-falsum
 ```
 
 Next, on your bootstrap file (usually `index.php`) add the following line:
