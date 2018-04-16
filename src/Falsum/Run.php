@@ -98,7 +98,9 @@ class Run
                         $add_root = $_SERVER['DOCUMENT_ROOT'].'/';
                     }
 
-                    $rows = file($add_root.$errors[$key]['file']);
+                    if (file_exists($add_root.$errors[$key]['file'])) {
+                        $rows = file($add_root.$errors[$key]['file']);
+                    }
                     $errors[$key]['script'] = '<div class="code-wrap">';
                     $errors[$key]['script'] .= '<pre class="excerpt">'.$eol;
                     for ($pos = $line_start; $pos <= $line_end; $pos++):
